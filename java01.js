@@ -1,0 +1,2 @@
+GravarDado.addEventListener('click', ()=>{
+})
