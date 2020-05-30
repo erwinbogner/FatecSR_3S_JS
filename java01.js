@@ -6,7 +6,7 @@ GravarDado.addEventListener('click', function() {
     let tipo = tipo.value
     fetch(URL_BASE, {
         method : 'POST',
-        body: 'NOME='+ nome+'&EMAIL='+email+'&TIPO='+tipo+'',
+        body: 'NOME='+ nome.value+'&EMAIL='+email.value+'&TIPO='+tipo.value+'',
         headers:{
             'Content-Type' : 'application/x-www-form-urlencoded'
         }
