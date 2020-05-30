@@ -46,20 +46,34 @@ GravarDado.addEventListener('click', function() {
         //.then(json => console.log(json.mensagem))
         .then(json => resposta.innerHTML = 'Incluido com sucesso . . . ')
 
+    CarregarDados();
+
 });
 
 //`NOME=${xnome}&EMAIL=${xemail}&TIPO=${xtipo}`,
 //body: 'NOME=' + xnome + '&EMAIL=' + xemail + '&TIPO=' + xtipo,
 
-botaoADD.addEventListener('click', () => {
-    fetch(URL_BASE, {
-            method: 'POST',
-            body: `nome=ErwinBogner&email=bonito@bonito.com&tipo=FISICA`,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        })
-        .then(response => response.json())
-        //.then( json => console.log( json.mensagem))
-        .then(json => resposta.innerHTML = 'Incluido com sucesso')
-});
+// botaoADD.addEventListener('click', () => {
+//     fetch(URL_BASE, {
+//             method: 'POST',
+//             body: `nome=ErwinBogner&email=bonito@bonito.com&tipo=FISICA`,
+//             headers: {
+//                 'Content-Type': 'application/x-www-form-urlencoded'
+//             }
+//         })
+//         .then(response => response.json())
+//         //.then( json => console.log( json.mensagem))
+//         .then(json => resposta.innerHTML = 'Incluido com sucesso')
+// });
+
+LimparDado.addEventListener('click', function () {
+    if(nome.value != ''){
+        nome.value = '';
+    }
+    if(email.value != ''){
+        email.value = '';
+    }
+    if(tipo.value != ''){
+        tipo.value = '';
+    }
+})
