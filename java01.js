@@ -20,19 +20,26 @@ function CarregarDados() {
             json.forEach(pessoas =>
                 dados1.innerHTML += `
                 <tr class="table-striped" id="identificador">
-                    <td> ${pessoas.ID}</td>
+                    <td>${pessoas.ID}</td>
                     <td>${pessoas.NOME}</td>
                     <td>${pessoas.EMAIL}</td>
                     <td>${pessoas.TIPO}</td>
-                    <td><button class="btn btn-primary">Alterar</button>
-                    <button class="btn btn-danger" id="excluir${pessoas.ID}" >Excluir</button></td>
+                    <td><button class="btn btn-primary"id="alterar-${pessoas.ID}">Alterar</button>
+                    <button class="btn btn-danger" id="excluir-${pessoas.ID}" >Excluir</button></td>
                 </tr>`
             );
 
             json.forEach(pessoas => {
                 let ident = pessoas.ID
-                document.getElementById('excluir'+ ident).addEventListener('click', function () {
+                document.getElementById('excluir-'+ ident).addEventListener('click', function () {
                     deletarDados(ident)
+                })
+                
+            })
+            json.forEach(pessoas => {
+                let ident = pessoas.ID
+                document.getElementById('alterar-'+ ident).addEventListener('click', function () {
+                    alterarDados(ident)
                 })
                 
             })
@@ -49,6 +56,21 @@ function deletarDados(ident) {
     .then(response => response.json())
     .then(json => alert(json.mensagem))
     
+}
+function alterarDados(ident) {
+    let xnome = nome.value
+    let xemail = email.value
+    let xtipo = tipo.value
+    fetch(URL_BASE, {
+        method:'PUT',
+            body: 'id='+ident+'&nome='+xnome+'&email='+xemail+'&tipo='+xtipo+'',
+        headers:{
+            'Content-Type' : 'application/x-www-form-urlencoded'
+        }
+    })
+    .then(response => response.json())
+    .then(json => alert(json.mensagem))
+
 }
 
 //resultado.value += pessoas.ID + '-' + pessoas.NOME + '-' + pessoas.EMAIL + '\n');
