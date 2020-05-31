@@ -18,13 +18,37 @@ function CarregarDados() {
         .then(response => response.json())
         .then(json => {
             json.forEach(pessoas =>
-                dados1.innerHTML += `<tr class="table-striped"><td> ${pessoas.ID}</td><td>${pessoas.NOME}</td><td>${pessoas.EMAIL}</td><td>${pessoas.TIPO}</td><td><button class="btn btn-primary">Alterar</button> <button class="btn btn-danger">Excluir</button></td></tr>`
+                dados1.innerHTML += `
+                <tr class="table-striped" id="identificador">
+                    <td> ${pessoas.ID}</td>
+                    <td>${pessoas.NOME}</td>
+                    <td>${pessoas.EMAIL}</td>
+                    <td>${pessoas.TIPO}</td>
+                    <td><button class="btn btn-primary">Alterar</button>
+                    <button class="btn btn-danger" id="excluir${pessoas.ID}" >Excluir</button></td>
+                </tr>`
             );
+
+            json.forEach(pessoas => {
+                let ident = pessoas.ID
+                document.getElementById('excluir'+ ident).addEventListener('click', function () {
+                    deletarDados(ident)
+                })
+                
+            })
         });
+        
     //dados1.innerHTML = str;
     //console.log(str);
     //dados1.innerHTML = `<tr><td>pessoas.ID</td><td>pessoas.NOME</td><td>pessoas.EMAIL</td><td>pessoas.TIPO</td></tr>`;
 
+}
+
+function deletarDados(ident) {
+    fetch(URL_BASE + ident, {method:'DELETE'})
+    .then(response => response.json())
+    .then(json => alert(json.mensagem))
+    
 }
 
 //resultado.value += pessoas.ID + '-' + pessoas.NOME + '-' + pessoas.EMAIL + '\n');
